@@ -40,7 +40,9 @@ struct ToDoList: View {
                 }
             }
             .sheet(isPresented: $sheetIsPresented) {
-                DetailView(passedValue: "")
+                NavigationStack{
+                    DetailView(passedValue: "")
+                }
             }
         }
     }
