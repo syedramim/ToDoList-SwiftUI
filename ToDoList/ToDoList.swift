@@ -23,24 +23,36 @@ struct ToDoList: View {
                     .font(.title2)
 
                 }
+                .onDelete(perform: toDosVM.delete)
+                .onMove(perform: toDosVM.move)
+//                .onDelete { indexSet in
+//                    toDosVM.delete(indexSet: indexSet)
+//                }
+//                .onMove { fromOffsets, toOffset in
+//                    toDosVM.move(fromOffsets: fromOffsets, toOffset: toOffset)
+//                }
             }
             .navigationTitle("To Do List")
             .navigationBarTitleDisplayMode(.automatic)
             .listStyle(.plain)
             .toolbar {
+                
+                ToolbarItem(placement: .navigationBarLeading) {
+                    EditButton()
+                }
+                
                 ToolbarItem(placement: .navigationBarTrailing){
                     Button {
                         sheetIsPresented.toggle()
                     } label: {
                         Image(systemName: "plus")
                     }
-
-
                 }
+                
             }
             .sheet(isPresented: $sheetIsPresented) {
                 NavigationStack{
-                    DetailView(toDo: ToDo(), newTodo: true)
+                    DetailView(toDo: ToDo(), newToDo: true)
                 }
             }
         }

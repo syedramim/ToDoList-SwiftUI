@@ -11,7 +11,7 @@ struct DetailView: View {
     @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var toDosVM: ToDosViewModel
     @State var toDo: ToDo
-    var newTodo = false
+    var newToDo = false
     
     var body: some View {
         List {
@@ -49,10 +49,8 @@ struct DetailView: View {
             
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button("Save"){
-                    if newTodo {
-                        toDosVM.toDos.append(toDo)
-                        dismiss()
-                    }
+                    toDosVM.saveToDo(toDo: toDo, newToDo: newToDo)
+                    dismiss()
                 }
             }
         }
